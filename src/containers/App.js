@@ -6,6 +6,11 @@ import classes from './App.module.css'
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+    console.log('[Apps.js] constructor');
+  }
+
   state = {
     person: [
       {id: 'adsasd', name: "Rahul", age: 27},
@@ -13,6 +18,15 @@ class App extends Component {
       {id: 'fdhghf', name: "Sameer", age: 24}
     ],
     showPerson: false
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
   }
 
   togglePersonHandler = () => {
@@ -40,6 +54,8 @@ class App extends Component {
 
   render() {
 
+    console.log('[App.js] render');
+
     let persons = null;
 
     if(this.state.showPerson) {
@@ -53,6 +69,7 @@ class App extends Component {
     return (
         <div className={classes.App}>
           <Cockpit 
+            title={this.props.appTitle}
             person={this.state.person} 
             showPerson={this.state.showPerson}
             togglePerson={this.togglePersonHandler} />
